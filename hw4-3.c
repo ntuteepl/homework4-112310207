@@ -1,4 +1,4 @@
-#include <stdio.h>
+ort task orders in ascending order of end time#include <stdio.h>
 
 // 定义一个结构体来表示任务订单
   typedef struct {
@@ -19,7 +19,7 @@
   while (scanf("%d %d", &orders[n].start, &orders[n].end) == 2) {n++;
   }
 // 根据任务订单的结束时间升序排序
-
+  qsort(orders, n,
   sizeof(Order), compare_orders);
 
   int passenger_count = 1;
