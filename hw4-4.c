@@ -1,63 +1,57 @@
 #include <stdio.h>
 
-  int main() {
-  int n;
-    scanf("%d", &n);
-  int boy[n][n];
-  int girl[n][n];
-
-    // 输入好感度矩阵
-  for (int i = 0; i < n; i++) {
-
-
-  for (int j = 0; j < n; j++) {
-    scanf("%d", &boy[i][j]);
-    }
-    }
-  for (int i = 0; i < n; i++) {
-
-
-  for (int j = 0; j < n; j++) {
-    scanf("%d", &girl[i][j]);
+int main()
+{
+    int ii,max=0,my,mx,x=0,y=0,t=0;
+    scanf("%d",&ii);
+    int pair[ii][ii];
+    for(y=0;y<ii;y++)
+    {
+    for( x=0;x<ii;x++)
+    {
+    scanf("%d", &pair[y][x]);
     }
     }
 
-  int boy_order[n];
-  int girl_order[n];
+for(int k=0;k<2;k++)
+{
+    k=0;
 
-// 初始化男生和女生的初始顺序
+    for(y=0;y<ii;y++)
+{
 
-  for (int i = 0; i < n; i++) {
-        boy_order[i] = i;
-        girl_order[i] = i;
+    for(x=0;x<ii;x++)
+    {
+        if(pair[y][x]>max)
+    {
+     max=pair[y][x];
+     my=y;
+     mx=x;
     }
-// 对男生的顺序进行排序，从高到低
-  for (int i = 0; i < n; i++) {
-  for (int j = i + 1; j < n; j++) {
 
+    }
 
-  if (boy[i][boy_order[j]] < boy[i][boy_order[i]]) {
-  int temp = boy_order[i];
-                boy_order[i] = boy_order[j];
-                boy_order[j] = temp;
-            }
+    }
+    printf("boy %d pair with girl %d\n",my+1,mx+1);
+    for(int i=0;i<ii;i++)
+    {
+    pair[i][mx]=0;
+    pair[my][i]=0;
+    }
+    for(int i=0;i<ii;i++)
+    {
+
+    for(int j=0;j<ii;j++)
+        {
+    if(pair[i][j]==0)  t++;
         }
-    }
 
-// 对女生的顺序进行排序，从高到低
-  for (int i = 0; i < n; i++) {
-  for (int j = i + 1; j < n; j++) {
-  if (girl[i][girl_order[j]] < girl[i][girl_order[i]]) {
-  int temp = girl_order[i];
-                girl_order[i] = girl_order[j];
-                girl_order[j] = temp;
-            }
-        }
-    }
 
-// 输出最佳情侣配对
-    for (int i = 0; i < n; i++) {
-    printf("boy %d pair with girl %d\n", boy_order[i] + 1, girl_order[i] + 1);
     }
-return 0;
-  }
+    if(t == ii*ii)
+    break;
+    else t=0;
+    max=0;
+}
+
+}
