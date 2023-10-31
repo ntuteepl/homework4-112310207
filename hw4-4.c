@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+
 int main()
 {
     int ii,max=0,my,mx,x=0,y=0,t=0;
