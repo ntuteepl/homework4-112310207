@@ -1,58 +1,94 @@
- <stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-// 定义一个结构体来表示任务订单
   typedef struct {
     int start;
     int end;
-} Order;
+}   Order;
 
-  int compare_orders(const void *a, const void *b) {
-    // 按照结束时间升序排序
-  return ((Order*)a)->end - ((Order*)b)->end;
+
+  int compareOrders(const void *a, const void *b) {
+  return ((Order *)a)->end - ((Order *)b)->end;
 }
 
   int main() {
-    Order orders[100];  // 假设最多有100个任务订单
+    Order *orders = NULL;
+
+
+  int capacity = 10;
+
 
   int n = 0;
-// 读取输入
-  while (scanf("%d %d", &orders[n].start, &orders[n].end) == 2) {n++;
-  }
-// 根据任务订单的结束时间升序排序
-  qsort(orders, n,
-  sizeof(Order), compare_orders);
 
-  int passenger_count = 1;
 
-  int current_end_time = orders[0].end;
+  int driverCount = 0;
 
-    // 打印第一个任务订单
+    orders = (Order *)
 
-  printf("%d %d ", orders[0].start, orders[0].end);
+  malloc(capacity * sizeof(Order));
 
-// 打印时间表
+    while (1) {
+        int start, end;
+        if (scanf("%d %d", &start, &end) == 2) {
 
-  for (int i = 1; i < n; i++) {
-    if (orders[i].start >= current_end_time) {
 
-// 可以派同一个旅客继续执行
+  if (n == capacity) {
+                capacity *= 2;
+                orders = (Order *)
 
-  printf("%d %d ", orders[i].start, orders[i].end);
-            current_end_time = orders[i].end;
+  realloc(orders, capacity * sizeof(Order));
+
+            orders[n].start = start;
+            orders[n].end = end;
+            n++;
         }
-   else {
-  passenger_count++;
-// 需要新的旅客
+
+        }
 
 
-  printf("\n%d %d ", orders[i].start, orders[i].end);
-            current_end_time = orders[i].end;
+
+
+  break;
+        }
+
+
+    qsort(orders, n,
+
+
+
+  sizeof(Order), compareOrders);
+
+
+
+
+  int *drivers = (int *)malloc(n * sizeof(int));
+
+
+  int currentEnd = 0;
+
+
+
+
+  for (int i = 0; i < n; i++) {
+        if (orders[i].start >= currentEnd) {
+            drivers[driverCount] = orders[i].start;
+            currentEnd = orders[i].end;
+            driverCount++;
         }
     }
 
 
-// 打印最少旅客需求数
-    printf("\n%d\n", passenger_count);
 
-return 0;
+    printf("%d\n", driverCount);
+    for (int i = 0; i < driverCount; i++) {
+        printf("%d ", drivers[i]);
+    }
+    printf("\n");
+
+    free(orders);
+
+
+ free(drivers);
+
+    return 0;
 }
