@@ -1,91 +1,55 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-  typedef struct {
-    int start;
-    int end;
-}   Order;
+int main()
+{
+    int i=0,j=0,k=0,x=0,y=1,sum=0,num=0,s[100],d[100],sf[100],df[100],s1,d1,count=0;
+    while(scanf("%d%d",&s[i],&d[i])!=EOF)  //輸入
+    {
+        i++;
+        count++;
+    }
 
+    for(i=0;i<count-1;i++)             //整理班表
+    {
+        for(int j=0;j<count;j++)
+        {
+            if(s[j]>s[j+1])
+            {
+                s1=s[j];
+                s[j]=s[j+1];
+                s[j+1]=s1;
 
-  int compareOrders(const void *a, const void *b) {
-  return ((Order *)a)->end - ((Order *)b)->end;
-}
-
-  int main() {
-    Order *orders = NULL;
-
-
-  int capacity = 10;
-
-
-  int n = 0;
-
-
-  int driverCount = 0;
-
-    orders = (Order *)
-
-  malloc(capacity * sizeof(Order));
-
-    while (1) {
-        int start, end;
-        if (scanf("%d %d", &start, &end) == 2) {
-
-
-  if (n == capacity) {
-                capacity *= 2;
-                orders = (Order *)
-
-  realloc(orders, capacity * sizeof(Order));
-
-            orders[n].start = start;
-            orders[n].end = end;
-            n++;
-        }
-
-        }
-
-
-
-
-  break;
-        }
-
-
-    qsort(orders, n,
-
-
-
-  sizeof(Order), compareOrders);
-
-
-
-
-  int *drivers = (int *)malloc(n * sizeof(int));
-
-
-  int currentEnd = 0;
-
-
-
-
-  for (int i = 0; i < n; i++) {
-        if (orders[i].start >= currentEnd) {
-            drivers[driverCount] = orders[i].start;
-            currentEnd = orders[i].end;
-            driverCount++;
+                d1=d[j];
+                d[j]=d[j+1];
+                d[j+1]=d1;
+            }
         }
     }
 
-
-
-    printf("%d\n", driverCount);
-    for (int i = 0; i < driverCount; i++) {
-        printf("%d ", drivers[i]);
+    for(i=0;i<count;i++)        //備份
+    {
+        sf[i]=s[i];
+        df[i]=d[i];
     }
-    printf("\n");
 
-    free(orders);
+    while(y!=0)                          //幾台車
+    {
+        for(i=0;i<count;i++)
+        {
+            sum=0;
+
+            if(d[x]<=s[i])
+            {
+                x=i;
+                s[i]=0;
+            }
+            s[x]=0;
+
+            if(i==count-1)
+            {
+                num++;
+                for(j=0;j<count;j++)
 
 
  free(drivers);
