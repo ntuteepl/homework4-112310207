@@ -50,9 +50,51 @@ int main()
             {
                 num++;
                 for(j=0;j<count;j++)
+                {
+                    if(s[j]!=0)
+                    {
+                        x=j;
+                        j=count;
+                    }
+                }
+            }
 
+            for(k=0;k<count;k++)
+            sum=sum+s[k];
+            if(sum==0)
+            y=0;
+        }
+    }
 
- free(drivers);
+    printf("%d",num);
+    x=0;
 
+    for(i=0;i<num;i++)            //輸出班表
+    {
+        printf("\nDriver %d's schedule is %d %d ",i+1,sf[x],df[x]);;
+
+        for(j=0;j<count;j++)
+        {
+            if(df[x]<=sf[j])
+            {
+                x=j;
+                printf("%d %d ",sf[j],df[j]);
+                sf[j]=0;
+            }
+            sf[x]=0;
+
+            if(j==count-1)
+            {
+                for(k=0;k<count;k++)
+                {
+                    if(sf[k]!=0)
+                    {
+                        x=k;
+                        k=count;
+                    }
+                }
+            }
+        }
+    }
     return 0;
 }
